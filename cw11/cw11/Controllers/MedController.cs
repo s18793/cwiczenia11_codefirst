@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using cw11.Models;
+using cw11.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,18 +13,19 @@ namespace cw11.Controllers
     [ApiController]
     public class MedController : ControllerBase
     {
-        private readonly MedDbContext _con;
+        // private readonly MedDbContext _con;
+        public IMedDbService _imed;
 
-
-        public MedController(MedDbContext context)
+        public MedController(IMedDbService imed)
         {
-            _con = context;
+            _imed = imed;
         }
 
         [HttpGet]
         public IActionResult GetDoctors()
         {
-            return Ok();
+            var data = _imed.GetDoctors();
+            return Ok(data);
         }
 
 

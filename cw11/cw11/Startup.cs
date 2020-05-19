@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using cw11.Models;
+using cw11.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,9 @@ namespace cw11
                 options.UseSqlServer("Data Source=db-mssql;Initial Catalog=s18793;Integrated Security=True");
 
             });
+            services.AddScoped<IMedDbService, EfMedDbService>();
             services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
