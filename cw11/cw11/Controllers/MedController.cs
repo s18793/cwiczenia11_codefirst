@@ -27,6 +27,24 @@ namespace cw11.Controllers
             var data = _imed.GetDoctors();
             return Ok(data);
         }
+        [HttpPost]
+        public IActionResult AddDoctor(Doctor doc)
+        {
+            var data = _imed.AddDoctor(doc);
+            return Ok(data);
+        }
+
+        [HttpDelete]
+        public IActionResult DelecteDoctor(int idDoc)
+        {
+            var data = _imed.DelecteDoctor(idDoc);
+            return Ok(data);
+        }
+        public IActionResult ModifDoc(Doctor doc)
+        {
+            var data = _imed.ModifDoc(doc);
+            return Ok(data);
+        }
 
 
     }

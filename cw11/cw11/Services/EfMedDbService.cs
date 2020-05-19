@@ -17,13 +17,26 @@ namespace cw11.Services
         public Doctor AddDoctor(Doctor doc)
         {
 
+            var newdoc = new Doctor
+            {
+                FirstName = doc.FirstName, LastName = doc.LastName,
+                Email = doc.Email
+            };
+            medDbContext.Add(newdoc);
+            medDbContext.SaveChanges();
+            return newdoc;
             
-            throw new NotImplementedException();
+          
         }
 
         public Doctor DelecteDoctor(int idDoc)
         {
-            throw new NotImplementedException();
+
+            var doc = medDbContext.Doctors.FirstOrDefault(d => d.IdDoctor == idDoc);
+            medDbContext.Doctors.Remove(doc);
+            medDbContext.SaveChanges();
+            //lub ewnetulanie where. toList() i foreach
+            return doc;
         }
 
         public IEnumerable<Doctor> GetDoctors()
@@ -35,7 +48,14 @@ namespace cw11.Services
 
         public Doctor ModifDoc(Doctor doc)
         {
-            throw new NotImplementedException();
+            var moddoc = medDbContext.Doctors.FirstOrDefault(d => d.IdDoctor == doc.IdDoctor);
+            moddoc.LastName = doc.LastName;
+            moddoc.FirstName = doc.FirstName;
+            moddoc.Email = doc.Email;
+            medDbContext.SaveChanges(); return moddoc;
+
+
+
         }
     }
 }
